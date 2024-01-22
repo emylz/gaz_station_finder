@@ -1,0 +1,4 @@
+venv/
+.pytest_cach/
+ENV_DIR/
+__pycache__/
