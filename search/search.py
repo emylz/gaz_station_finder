@@ -250,6 +250,6 @@ class Search:
     @staticmethod
     def main(args):
         ressources_path = "ressources/oil_data/PrixCarburants_annuel_2022.xml"
-        output_ppath = "outputs/results.json"
+        output_path = "outputs/results.json"
 
-        Search.run(args=args, ressources_path=ressources_path, output_path=output_ppath)
+        Search.run(args=args, ressources_path=ressources_path, output_path=output_path)
