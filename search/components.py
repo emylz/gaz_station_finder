@@ -123,7 +123,8 @@ class Coordinate:
     @classmethod
     def validate_latitude(cls, latitude: float) -> float:
         """
-        Try to 
+        Check if the entered latitude can be parsed to a float and
+        if it is inside the acceptable range of values
         """
 
         try:
@@ -139,6 +140,8 @@ class Coordinate:
     @classmethod
     def validate_longitude(cls, longitude: float) -> float:
         """
+        Check if the entered longitude can be parsed to a float and
+        if it is inside the acceptable range of values
         """
 
         try:
