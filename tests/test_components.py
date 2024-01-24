@@ -1,7 +1,8 @@
-from search.components import User, Station, Gaz
+from search.components import User, Station, Gaz, Coordinate
 
 import datetime
 import pytest
+import argparse
 
 
 class TestUser:
@@ -97,3 +98,48 @@ class TestGaz:
 
         assert get_gaz.gaz_type == "E10"
         assert get_gaz.id == 5
+
+
+class TestCoordinate:
+
+    def test_validate_latitude(self):
+        """Test the latitude argument is parsed as expected"""
+
+        assert Coordinate.validate_latitude("90") == 90.0
+
+    def test_validate_latitude_exception(self):
+        """Test an exception is raised when the latitude is outside of the boundaries"""
+
+        with pytest.raises(argparse.ArgumentTypeError) as error:
+            argparse.ArgumentTypeError, Coordinate.validate_latitude("-91.0")
+
+        assert str(error.value) == "Latitude value is incorrect. Value expects [-90: 90]. Found: -91.0"
+
+    def test_validate_latitude_string_exception(self):
+        """Test an exception is raised when the latitude cannot be cast to a float"""
+
+        with pytest.raises(argparse.ArgumentTypeError) as error:
+            argparse.ArgumentTypeError, Coordinate.validate_latitude("72e1.02")
+
+        assert str(error.value) == "Wrong value format for latitude. Expects a float value."
+
+    def test_validate_longitude(self):
+        """Test the longitude argument is parsed as expected"""
+
+        assert Coordinate.validate_longitude("-180.0") == -180.0
+
+    def test_validate_longitude_exception(self):
+        """Test an exception is raised when the latitude is outside of the boundaries"""
+
+        with pytest.raises(argparse.ArgumentTypeError) as error:
+            argparse.ArgumentTypeError, Coordinate.validate_longitude("190.9")
+
+        assert str(error.value) == "Longitude value is incorrect. Value expects [-180: 180]. Found: 190.9"
+
+    def test_validate_longitude_string_exception(self):
+        """Test an exception is raised when the longitude cannot be cast to a float"""
+
+        with pytest.raises(argparse.ArgumentTypeError) as error:
+            argparse.ArgumentTypeError, Coordinate.validate_longitude("-999e.099")
+
+        assert str(error.value) == "Wrong value format for longitude. Expects a float value."

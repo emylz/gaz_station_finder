@@ -1,4 +1,5 @@
 import datetime
+import argparse
 
 
 class User:
@@ -105,3 +106,47 @@ class Gaz:
     def __init__(self, gaz_type: str):
         self.gaz_type = gaz_type
         self.id = Gaz.GAZ_MAPPING[gaz_type]
+
+
+class Coordinate:
+    """
+    Represent the coordinates entered by the user.
+
+    Used to validate the coordonates.
+    """
+
+    MIN_VALUE_LATITUDE = -90.0
+    MAX_VALUE_LATITUDE = 90.0
+    MIN_VALUE_LONGITUDE = -180
+    MAX_VALUE_LONGITUDE = 180
+
+    @classmethod
+    def validate_latitude(cls, latitude: float) -> float:
+        """
+        Try to 
+        """
+
+        try:
+            latitude = float(latitude)
+        except ValueError:
+            raise argparse.ArgumentTypeError("Wrong value format for latitude. Expects a float value.")
+        if latitude < cls.MIN_VALUE_LATITUDE or latitude > cls.MAX_VALUE_LATITUDE:
+            raise argparse.ArgumentTypeError(
+                "Latitude value is incorrect. Value expects [-90: 90]. Found: {}".format(latitude)
+                )
+        return latitude
+
+    @classmethod
+    def validate_longitude(cls, longitude: float) -> float:
+        """
+        """
+
+        try:
+            longitude = float(longitude)
+        except ValueError:
+            raise argparse.ArgumentTypeError("Wrong value format for longitude. Expects a float value.")
+        if longitude < cls.MIN_VALUE_LONGITUDE or longitude > cls.MAX_VALUE_LONGITUDE:
+            raise argparse.ArgumentTypeError(
+                "Longitude value is incorrect. Value expects [-180: 180]. Found: {}".format(longitude)
+                )
+        return longitude
