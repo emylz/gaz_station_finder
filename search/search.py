@@ -94,7 +94,7 @@ class Search:
     @classmethod
     def validate_station(cls, station: Station) -> bool:
         """
-        Check a station are the right attributes filled in before adding it the list of stations
+        Check a station has the right attributes filled in before adding it the list of stations
         Return True if the station:
           - is defined
           - has a price extracted from the input data

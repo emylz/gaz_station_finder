@@ -6,6 +6,7 @@ import argparse
 
 
 class TestUser:
+    """Test class for User fonctions"""
 
     @pytest.fixture
     def get_user(self):
@@ -30,6 +31,7 @@ class TestUser:
 
 
 class TestStation:
+    """Test class for Stations fonctions"""
 
     @pytest.fixture
     def get_station(self):
@@ -87,6 +89,7 @@ class TestStation:
 
 
 class TestGaz:
+    """Test class for Gaz fonctions"""
 
     @pytest.fixture
     def get_gaz(self):
@@ -101,6 +104,7 @@ class TestGaz:
 
 
 class TestCoordinate:
+    """Test class for Coordinates fonctions"""
 
     def test_validate_latitude(self):
         """Test the latitude argument is parsed as expected"""
